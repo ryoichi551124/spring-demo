@@ -1,10 +1,11 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.used.Greet;
+import com.example.demo.service.BusinessLogic;
 
 /**
  * SpringBoot起動クラス
@@ -19,16 +20,22 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args)
 		.getBean(DemoApplication.class).execute();
 	}
-	
-	/** 注入される箇所（インターフェース） */
+
+	/** DI */
 	@Autowired
-	private Greet g;
-	
+	@Qualifier("test")
+	private BusinessLogic business1; // TestLogicImplのインスタンス
+
+	/** DI */
+	@Autowired
+	@Qualifier("sample")
+	private BusinessLogic business2; // SampleLogicImplのインスタンス
+
 	/**
 	 * 実行
 	 */
 	private void execute() {
-		String msg = g.greeting();
-		System.out.println(msg);
+		business1.doLogic();
+		business2.doLogic();
 	}
 }
