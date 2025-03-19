@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.example.Example;
+import com.example.demo.service.TargetService;
 
 /**
  * SpringBoot起動クラス
@@ -19,10 +19,12 @@ public class DemoApplication {
 
 	/** DI */
 	@Autowired
-	private Example example;
+	private TargetService service;
 
 	/** 実行 */
 	private void execute() {
-		example.run();
+		service.sayHello("太郎");
+		System.out.println("**************");
+		service.sayGoodBye("花子");
 	}
 }
